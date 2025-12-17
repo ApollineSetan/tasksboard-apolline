@@ -1,59 +1,44 @@
-# TaskboardApolline
+# Séquence 3 – Lazy Loading & Composants dynamiques
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.0.
+---
 
-## Development server
+## 1. Qu’est-ce que le Lazy Loading ?
 
-To start a local development server, run:
+Le lazy loading permet de charger une partie de l’application uniquement lorsqu’elle est nécessaire, et non dès le démarrage.
 
-```bash
-ng serve
-```
+### Avantages
+- Réduction du temps de chargement initial  
+- Amélioration des performances globales  
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+En Angular, le lazy loading est généralement mis en place via le Router, en chargeant des modules ou des features à la demande.
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 2. Organisation d’une application par features
 
-```bash
-ng generate component component-name
-```
+Une application Angular est souvent structurée par fonctionnalités plutôt que par type de fichiers.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Le dossier `features` contient des blocs indépendants de l’application.
 
-```bash
-ng generate --help
-```
+### Cette organisation rend le code :
+- Plus lisible  
+- Plus facile à maintenir  
+- Compatible avec le lazy loading  
 
-## Building
+---
 
-To build the project run:
+## 3. Qu’est-ce qu’un composant dynamique ?
 
-```bash
-ng build
-```
+`ViewContainerRef` représente un emplacement dans le template où Angular peut insérer dynamiquement un composant.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Cela permet :
+- Un template plus simple  
+- Une interface flexible et dynamique  
 
-## Running unit tests
+### Fonctionnement
+1. Placer une balise avec une référence (`#container`) dans le HTML  
+2. Récupérer cette référence avec `@ViewChild`  
+3. Vider le container si nécessaire avec `clear()`  
+4. Créer le composant dynamiquement avec `createComponent()`
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---
