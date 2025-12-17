@@ -1,0 +1,32 @@
+<main class="tasks-page">
+
+  <h1>📋 Liste des tâches</h1>
+
+  @if (tasks$ | async; as tasks) {
+
+    <ul>
+      @for (t of tasks; track t.id) {
+        <li>
+          {{ t.title }}
+          <button type="button" (click)="highlight(t)">
+            mettre en avant
+          </button>
+        </li>
+      }
+    </ul>
+
+  } @else {
+    <p>chargement des tâches...</p>
+  }
+
+  <div class="task-form">
+    <input
+      [(ngModel)]="newTask"
+      placeholder="Nouvelle tâche..."
+    />
+    <button (click)="addTask()">Ajouter</button>
+  </div>
+
+  <div #highlightContainer></div>
+
+</main>
