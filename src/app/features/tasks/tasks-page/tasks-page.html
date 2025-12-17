@@ -6,10 +6,16 @@
 
     <ul>
       @for (t of tasks; track t.id) {
-        <li>
+        <li [class.completed]="t.completed">
           {{ t.title }}
           <button type="button" (click)="highlight(t)">
-            mettre en avant
+            ✨ Mettre en avant
+          </button>
+          <button type="button" (click)="deleteTask(t.id)">
+            🗑️ Supprimer
+          </button>
+          <button type="button" (click)="toggleCompleted(t.id)">
+            ✅ Terminer
           </button>
         </li>
       }
@@ -21,10 +27,11 @@
 
   <div class="task-form">
     <input
-      [(ngModel)]="newTask"
+      #taskInput
       placeholder="Nouvelle tâche..."
+      (keyup.enter)="addTask(taskInput)"
     />
-    <button (click)="addTask()">Ajouter</button>
+    <button (click)="addTask(taskInput)">Ajouter</button>
   </div>
 
   <div #highlightContainer></div>

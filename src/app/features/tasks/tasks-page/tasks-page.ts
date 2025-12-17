@@ -23,15 +23,24 @@ export class TasksPage {
     this.tasks$ = this.tasksService.tasks$; 
   }
 
-  addTask() {
-    if (!this.newTask.trim()) return;
-    this.tasksService.addTask(this.newTask);
-    this.newTask = '';
+  addTask(input: HTMLInputElement) {
+    const title = input.value.trim();
+    if (!title) return;
+    this.tasksService.addTask(title);
+    input.value = '';
   }
 
   highlight(task: Task) {
     this.container.clear();
     const componentRef = this.container.createComponent(TasksHighlight);
     componentRef.instance.title = task.title;
+  }
+
+  deleteTask(id: number) {
+    this.tasksService.deteleTask(id);
+  }
+
+  toggleCompleted(id: number) {
+    this.tasksService.toggleCompleted(id);
   }
 }

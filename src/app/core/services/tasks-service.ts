@@ -33,4 +33,16 @@ export class TasksService {
 
     this.tasksSubject.next([...tasks, newTask]);
   }
+
+  deteleTask(id: number): void {
+    const tasks = this.tasksSubject.value.filter(task => task.id !== id);
+    this.tasksSubject.next(tasks);
+  }
+
+  toggleCompleted(id: number): void {
+    const tasks = this.tasksSubject.value.map(task =>
+      task.id === id ? { ...task, completed: !task.completed } : task
+    );
+    this.tasksSubject.next(tasks);
+  }
 }
