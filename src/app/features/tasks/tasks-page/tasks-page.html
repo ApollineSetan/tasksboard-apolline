@@ -7,17 +7,25 @@
     <ul>
       @for (t of tasks; track t.id) {
         <li [class.completed]="t.completed">
-          {{ t.title }}
-          <button type="button" (click)="highlight(t)">
-            ✨ Mettre en avant
-          </button>
-          <button type="button" (click)="deleteTask(t.id)">
-            🗑️ Supprimer
-          </button>
-          <button type="button" (click)="toggleCompleted(t.id)">
-            ✅ Terminer
-          </button>
+            <span class="task-title">
+                {{ t.title }}
+            </span>
+            <div class="task-actions">
+                <button type="button" (click)="highlight(t)" title="Mettre en avant">
+                ✨
+                </button>
+                <button type="button" (click)="editTask(t)" title="Éditer">
+                ✏️
+                </button>
+                <button type="button" (click)="toggleCompleted(t.id)" title="Terminer">
+                ✅
+                </button>
+                <button type="button" (click)="deleteTask(t.id)" title="Supprimer">
+                🗑️
+                </button>
+            </div>
         </li>
+
       }
     </ul>
 

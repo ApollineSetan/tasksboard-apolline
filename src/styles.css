@@ -40,10 +40,43 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
+.task-title {
+  flex: 1;
+  margin-right: 1rem;
+  font-weight: 500;
+}
+
 .tasks-page li:hover {
   transform: translateY(-3px);
   box-shadow: 0 10px 20px rgba(103, 203, 107, 0.25);
   background-color: #26312e;
+}
+
+.task-actions {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.task-actions button {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: 10px;
+  font-size: 0.9rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: linear-gradient(135deg, #4caf50, #67cb6b);
+  border: none;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.task-actions button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(103, 203, 107, 0.35);
 }
 
 .tasks-page button {
@@ -109,4 +142,8 @@
 li.completed {
   opacity: 0.6;
   text-decoration: line-through;
+}
+
+.editedTitle {
+    color: #e9fff0;
 }

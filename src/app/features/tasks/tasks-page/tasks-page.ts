@@ -1,8 +1,9 @@
-import { Component, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ComponentRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TasksService, Task } from '../../../core/services/tasks-service';
 import { TasksHighlight } from '../../tasks-highlight/tasks-highlight';
+import { TaskEdit } from '../../tasks-edit/tasks-edit';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -43,4 +44,23 @@ export class TasksPage {
   toggleCompleted(id: number) {
     this.tasksService.toggleCompleted(id);
   }
+
+  editTask(task: Task) {
+  this.container.clear();
+
+  const componentRef: ComponentRef<TaskEdit> =
+    this.container.createComponent(TaskEdit);
+
+  componentRef.instance.title = task.title;
+
+  componentRef.instance.save.subscribe((newTitle: string) => {
+    this.tasksService.updateTask(task.id, newTitle);
+    this.container.clear();
+  });
+
+  componentRef.instance.cancel.subscribe(() => {
+    this.container.clear();
+  });
+}
+
 }

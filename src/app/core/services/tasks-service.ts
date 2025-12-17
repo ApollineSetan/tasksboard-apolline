@@ -45,4 +45,12 @@ export class TasksService {
     );
     this.tasksSubject.next(tasks);
   }
+
+  updateTask(id: number, newTitle: string): void {
+  const tasks = this.tasksSubject.value.map(task =>
+    task.id === id ? { ...task, title: newTitle } : task
+  );
+  this.tasksSubject.next(tasks);
+}
+
 }
