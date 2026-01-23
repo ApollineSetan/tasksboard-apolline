@@ -1,4 +1,4 @@
-import { Component, ComponentRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ComponentRef, ViewChild, ViewContainerRef, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TasksService, Task } from '../../../core/services/tasks-service';
@@ -10,7 +10,8 @@ import { Observable } from 'rxjs';
   selector: 'app-tasks-page',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './tasks-page.html'
+  templateUrl: './tasks-page.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TasksPage {
 
@@ -18,7 +19,8 @@ export class TasksPage {
   container!: ViewContainerRef;
 
   newTask = '';
-  tasks$: Observable<Task[]>; 
+  tasks$: Observable<Task[]>;
+  highlightedTaskId: number | null = null;
 
   constructor(public tasksService: TasksService) {
     this.tasks$ = this.tasksService.tasks$; 
@@ -32,9 +34,15 @@ export class TasksPage {
   }
 
   highlight(task: Task) {
-    this.container.clear();
-    const componentRef = this.container.createComponent(TasksHighlight);
-    componentRef.instance.title = task.title;
+    if (this.highlightedTaskId === task.id) {
+      this.container.clear();
+      this.highlightedTaskId = null;
+    } else {
+      this.container.clear();
+      const componentRef = this.container.createComponent(TasksHighlight);
+      componentRef.instance.title = task.title;
+      this.highlightedTaskId = task.id;
+    }
   }
 
   deleteTask(id: number) {

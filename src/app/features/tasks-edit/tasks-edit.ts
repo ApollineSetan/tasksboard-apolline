@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -6,8 +6,10 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-task-edit',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './tasks-edit.html'
+  templateUrl: './tasks-edit.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
+
 export class TaskEdit {
   @Input() title = '';
   @Output() save = new EventEmitter<string>();
